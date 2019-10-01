@@ -26,21 +26,44 @@
         </div>
         <hr />
         <div>
+            <h1>test</h1>
+            <label>v-model语法糖的原理</label>
             <myel-input
                 :value="value"
                 @input="value = arguments[0]"
             ></myel-input>
-            <myel-input v-model="value"></myel-input>
+            <hr />
+
+            <h1>仿写的el-form</h1>
+            <myel-form :model="model" :rules="rules">
+                <myel-form-item label="用户名" prop="username">
+                    <myel-input
+                        type="text"
+                        v-model="model.username"
+                    ></myel-input>
+                </myel-form-item>
+                <myel-form-item label="密码" prop="password">
+                    <myel-input
+                        type="password"
+                        v-model="model.password"
+                    ></myel-input>
+                </myel-form-item>
+            </myel-form>
         </div>
     </div>
 </template>
 
 <script>
 import MyelInput from '@/components/MyelInput';
+import MyelFormItem from '@/components/MyelFormItem';
+import MyelForm from '@/components/MyelForm';
+
 export default {
     name: 'app',
     components: {
-        MyelInput
+        MyelInput,
+        MyelFormItem,
+        MyelForm
     },
     data() {
         return {
@@ -59,7 +82,7 @@ export default {
     methods: {
         submitForm(form) {
             this.$refs[form]
-                .validate()
+                .validator()
                 .then(value => {
                     alert('请求登录!' + value);
                 })
