@@ -35,7 +35,7 @@
             <hr />
 
             <h1>仿写的el-form</h1>
-            <myel-form :model="model" :rules="rules">
+            <myel-form :model="model" :rules="rules" ref="myelForm">
                 <myel-form-item label="用户名" prop="username">
                     <myel-input
                         type="text"
@@ -48,6 +48,9 @@
                         v-model="model.password"
                     ></myel-input>
                 </myel-form-item>
+                <button type="button" @click="submitForm('myelForm')">
+                    提交
+                </button>
             </myel-form>
         </div>
     </div>
@@ -82,12 +85,14 @@ export default {
     methods: {
         submitForm(form) {
             this.$refs[form]
-                .validator()
+                .validate()
                 .then(value => {
                     alert('请求登录!' + value);
+                    console.log(value);
                 })
                 .catch(err => {
                     alert('校验失败!' + err);
+                    console.log(err);
                 });
         }
     }

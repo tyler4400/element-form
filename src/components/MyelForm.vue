@@ -20,6 +20,16 @@ export default {
         rules: {
             type: Object
         }
+    },
+    methods: {
+        validate() {
+            let all = [];
+            console.log(this.$children);
+            this.$children.forEach(field => {
+                all.push(field.fieldValidator());
+            });
+            return Promise.all(all);
+        }
     }
 };
 </script>

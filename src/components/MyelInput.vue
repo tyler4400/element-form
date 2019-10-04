@@ -21,7 +21,7 @@ export default {
         input($event) {
             console.log($event);
             this.$emit('input', $event.target.value);
-            this.$parent.$emit('validator'); // 总觉得让parent来emit不是很好，万一parent不是myel-form呢？
+            this.$parent.$emit('validator'); // 总觉得让parent来emit不是很好，万一parent不是myel-formItem呢？
         }
     }
 };
